@@ -1,0 +1,4 @@
+<div *ngFor="let comment of comments" style="padding-left: 10px; width:100px;">
+      <textarea style="border-radius: 10px;">{{comment.text}}</textarea>
+      <app-req [comments]="comment.comments" *ngIf="comment.comments"></app-req>
+</div>
