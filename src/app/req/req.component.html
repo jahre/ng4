@@ -1,4 +1,8 @@
-<div *ngFor="let comment of comments" style="padding-left: 10px; width:100px;">
-      <textarea style="border-radius: 10px;">{{comment._id}}</textarea>
+<div *ngFor="let comment of comments" style="padding-left: 10px; width:300px;">
+      <div style="border: 1px solid red;">
+            <h1>{{comment.name}}</h1>
+            <i>id: {{comment._id}}</i>
+            <h5>parent: {{comment.parent}}</h5>
+      </div>
       <app-req [comments]="comment.children" *ngIf="comment.children"></app-req>
 </div>
