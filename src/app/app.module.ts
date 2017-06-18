@@ -7,20 +7,29 @@ import { AppComponent } from './app.component';
 import { ServerComponent } from './server/server.component';
 import { ServersComponent } from './servers/servers.component';
 import { ReqComponent } from './req/req.component';
+import { RouterModule, Routes } from '@angular/router';
+import { DefaultComponent } from './default.component';
+
+const appRoutes: Routes = [
+  { path: '', component: AppComponent },
+  { path: 'blank', component: AppComponent },
+];
 
 @NgModule({
   declarations: [
     AppComponent,
     ServerComponent,
     ServersComponent,
-    ReqComponent
+    ReqComponent,
+    DefaultComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    RouterModule.forRoot(appRoutes)
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [DefaultComponent]
 })
 export class AppModule { }

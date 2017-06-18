@@ -1,8 +1,39 @@
-<div *ngFor="let comment of comments" style="padding-left: 10px; width:300px;">
-      <div style="border: 1px solid red;">
+<div *ngFor="let comment of comments" style="padding-left: 10px; border-left: 1px solid #ccc;">
+      <div style="border: 1px solid red; padding: 5px; margin-bottom: 5px;" [ngClass]="{'priority': comment.priority }">
             <h1>{{comment.name}}</h1>
             <i>id: {{comment._id}}</i>
             <h5>parent: {{comment.parent}}</h5>
+            <!--<button class="btn btn-primary" (click)="postData(comment.name)">Post Data</button>-->
+            <button (click)="showForm = true">Add</button>
+            <!--<form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate >
+                <textarea name="name" [(ngModel)]="comment.name" style="display: block; width: 100%;"></textarea>
+                <input type="hidden" name="parent" [(ngModel)]="comment._id">
+                <input type="hidden" name="children_count" [(ngModel)]="comment.children.length">
+              
+                <input type="submit">
+            </form>-->
+            <form #d="ngForm" (ngSubmit)="onSubmitRemove(d)" novalidate>
+                <input type="hidden" name="doc_id" [(ngModel)]="comment._id">
+                <input type="submit" value="Remove">
+            </form>
+
+            <form #p="ngForm" (ngSubmit)="onSubmitPrior(p)" novalidate>
+                <input type="hidden" name="prior" [(ngModel)]="comment.priority">
+                <input type="hidden" name="doc_id" [(ngModel)]="comment._id">
+                <input type="submit" value="SetPrior">
+            </form>
+           
+      </div>
+      <div *ngIf="showForm" style="padding-left: 10px; ">
+          <div style="border: 1px solid red; padding: 5px; margin: 5px;">
+            <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate >
+                <textarea name="name" ngModel style="display: block; width: 100%;"></textarea>
+                <input type="hidden" name="parent" [(ngModel)]="comment._id">
+                <input type="hidden" name="children_count" [(ngModel)]="comment.children.length">
+              
+                <input type="submit">
+            </form>
+          </div>
       </div>
       <app-req [comments]="comment.children" *ngIf="comment.children"></app-req>
 </div>
